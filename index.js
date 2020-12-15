@@ -92,8 +92,7 @@ Use the higher order function getAverageGoals to do the following:
 */
 
 function getAverageGoals(callBack) {
-  
-    let average = callBack.reduce((acc,val) => acc + (val["Home Team Goals"] + val["Away Team Goals"]),0) / callback.length;
+    let average = callBack.reduce((acc,val) => acc + (val["Home Team Goals"] + val["Away Team Goals"]),0) / callBack.length;
     return average.toFixed(2);
    
 }

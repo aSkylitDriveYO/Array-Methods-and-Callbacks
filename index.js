@@ -16,6 +16,7 @@ Practice accessing data by console.log-ing the following pieces of data note, yo
 //(e) Winner of 2014 world cup final */
 
 
+
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 2: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
 Use getFinals to do the following:
 1. Receive data as a parameter
@@ -24,10 +25,9 @@ Use getFinals to do the following:
 hint - you should be looking at the stage key inside of the objects
 */
 
-function getFinals(/* code here */) {
-   /* code here */
+function getFinals(data) {
+    return data.filter((teams) => teams.Stage === "Final");
 }
-
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 3: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
@@ -36,10 +36,10 @@ Use the higher-order function called getYears to do the following:
 2. Receive a callback function getFinals from task 2 
 3. Return an array called years containing all of the years in the getFinals data set*/
 
-function getYears(/* code here */) {
-    /* code here */
+function getYears(data, callback) {
+    let years = data.map(callback => callback.Year);
+    return years;
 }
-
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 4: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
@@ -49,8 +49,15 @@ Use the higher-order function getWinners to do the following:
 3. Determines the winner (home or away) of each `finals` game. 
 4. Returns the names of all winning countries in an array called `winners` */ 
 
-function getWinners(/* code here */) {
-    /* code here */
+function getWinners(data, callback) {
+    let winners = callback(data).map(function(item){
+        if(item["Home Team Goals"] >  item["Away Team Goals"]) {
+            return item["Home Team Name"];
+        } else {
+            return item["Away Team Name"];
+        }
+    })
+    return winners;
 }
 
 
@@ -65,8 +72,11 @@ Use the higher-order function getWinnersByYear to do the following:
 hint: the strings returned need to exactly match the string in step 4.
  */
 
-function getWinnersByYear(/* code here */) {
-    /* code here */
+function getWinnersByYear(data, gYcB, gWcB) {
+    let winYear = gWcB(data).map(function(item, index){
+        return `In ${gYcB(data)[index]}, ${gWcB(data)[index]} won the world cup!`
+    });
+    return winYear;
 }
 
 
@@ -81,9 +91,13 @@ Use the higher order function getAverageGoals to do the following:
  Example of invocation: getAverageGoals(getFinals(fifaData));
 */
 
-function getAverageGoals(/* code here */) {
-   /* code here */
+function getAverageGoals(callBack) {
+  
+    let average = callBack.reduce((acc,val) => acc + (val["Home Team Goals"] + val["Away Team Goals"]),0) / callback.length;
+    return average.toFixed(2);
+   
 }
+ 
 
 
 
